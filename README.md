@@ -2,13 +2,21 @@
 
 ## Objectives
 
+1. Understand the category of control flow statements as decision-making instructions built into a program.
+2. Use `if`, `else`, and `else if` statements to build a logic tree.
+3. Use Swift's `switch` statement with integers, ranges, and objects.
+4. Get introduced to creating, accessing, and modifying implicitly-typed arrays.
+5. Use a `for-in` loop to iterate over every element in a sequence.
+6. Use a `for` loop to iterate through a sequence in a way that requires a counter.
+7. Recognize the syntax for `while` and `repeat-while` loops.
+
 ## Control Flow
 
 In the context of programming, [Control Flow](https://en.wikipedia.org/wiki/Control_flow) refers to code structures that instruct the program on how to make decisions based upon various conditions; they are a way to define dynamic behavior for a variety of situations.
 
 A good metaphor for visualizing control flow is to imagine the branching tracks in a train-yard. Different control flow statements are analogous to different structures in the train tracks.
 
-![](trainyard)  
+![](https://curriculum-content.s3.amazonaws.com/swift/swift-control-flow/1024px-Beacon_Park_Rail_Yard.jpg)  
 — *Beacon Park Yard in Boston*, 2012, by [Fletcher6](https://commons.wikimedia.org/wiki/File:Beacon_Park_Rail_Yard.jpg), Wikipedia [CC-BY 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en)
 
 This reading will discuss the usage of the code structures detailed in the [Control Flow chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/ControlFlow.html#//apple_ref/doc/uid/TP40014097-CH9-ID120) of Apple's *The Swift Programming Language*.
@@ -240,7 +248,7 @@ In order to add or change an element in an array, it must have been declared usi
 numbers[0] = 0
 vowels.append("y")
 ```
-![](screenshot of error)
+![](https://curriculum-content.s3.amazonaws.com/swift/swift-control-flow/error_mutating_arrays_made_with_let.png)
 
 Instead, declare the arrays using `var` in order to mutate them:
 
@@ -266,6 +274,13 @@ print(vowels.count)
 A `for-in` loop can be used to step through everything in a given sequence, either a range or a collection such as an array or a dictionary.
 
 ```swift
+for <element> in <sequence> {
+    <statements>
+}
+```
+An implementation that steps through the integers in a range might look like this:
+
+```swift
 for number in 1...5 {
     print("The square of \(number) is \(number * number).")
 }
@@ -279,9 +294,10 @@ The square of 3 is 9.
 The square of 4 is 16.
 The square of 5 is 25.
 ```
+Iterating over an array of strings might look like this:
 
 ```swift
-let names = ["Tim", "Joe", "Jim", "Tom", "Mark"]
+let names = ["Joe", "Tim", "Jim", "Tom", "Mark"]
 
 for name in names {
     print("\(name) works at the Flatiron School.")
@@ -290,8 +306,8 @@ for name in names {
 This will print:
 
 ```
-Tim works at the Flatiron School.
 Joe works at the Flatiron School.
+Tim works at the Flatiron School.
 Jim works at the Flatiron School.
 Tom works at the Flatiron School.
 Mark works at the Flatiron School.
@@ -299,4 +315,111 @@ Mark works at the Flatiron School.
 
 ### The `for` Loop
 
+The `for` loop in Swift provides context for defining the familiar counter, conditional, and increment statements which must be separated by semicolons (`;`). Objective-C developers will find this syntax familiar, with the exception of omitting the parenthesis on the opening line:
+
+```swift
+for <initialization>; <condition>; <increment> {
+    <statements>
+}
+```
+Though `for-in` loops provide a cleaner syntax when working with whole sequences, a `for` provides a structured syntax when using a counter variable within the loop's implementation is necessary, such as when accessing associated values in more than one array:
+
+```swift
+let firstNames = ["Joe", "Tim", "Jim", "Tom", "Mark"]
+let lastNames = ["Burgess", "Clem", "Campagno", "O'Malley", "Murray"]
+
+for var i = 0; i < firstNames.count; i++ {
+    print("\(firstNames[i]) \(lastNames[i]) works at the Flatiron School.")
+}
+``` 
+This will print:
+
+```swift
+Joe Burgess works at the Flatiron School.
+Tim Clem works at the Flatiron School.
+Jim Campagno works at the Flatiron School.
+Tom O'Malley works at the Flatiron School.
+Mark Murray works at the Flatiron School.
+```
+
 ### The `while` and `repeat-while` Loops
+
+These "simple" loops are synonymous to the `while` and `do-while` loops in Objective-C. These loops differ from `for` and `for-in` loops in that they do not safeguard against not defining a limitation; **it is easy to accidentally write infinite loops with these loop types.**
+
+The primary difference between them is that the `while` loop evaluates its condition before the loop executes, but a `repeat-while` loop evaluates its condition *after* the first iteration of the loop. If you want to ensure that the loop always runs at least once, a `repeat-while` loop may be your best option.
+
+##### The `while` loop:
+
+```swift
+while <condition> {
+    <statements>
+}
+```
+We can use a `while` loop to generate a string of letters of a certain length:
+
+```swift
+var eek = "";
+
+while eek.characters.count < 10 {
+    eek += "e"
+}
+eek += "k!"
+
+print(eek)
+```
+This will print: `eeeeeeeeeek!`.
+
+##### The `repeat-while` loop:
+
+```swift
+repeat {
+    <statements>
+} while <condition>
+```
+We can use a `repeat-while` loop to write a dice roller that will continue totaling new rolls until a `1` is rolled:
+
+```swift
+var roll = 0;
+var total = 0;
+
+repeat {
+    roll = 1 + Int(arc4random_uniform(6));
+    total += roll
+    print("Rolled a \(roll)")
+} while roll > 1
+
+print("Total score: \(total)")
+```
+This may print:
+
+```
+Rolled a 4
+Rolled a 3
+Rolled a 1
+Total score: 8
+```
+
+However, if you find yourself needing to create a counter variable, it is recommended that you convert your loop to a `for` loop which explicitly includes it in its opening syntax:
+
+```swift
+var grammarQuirk = ""
+
+for var i = 0; i < 8; i++ {
+    var buffalo = "buffalo"
+    if i == 0 || i == 2 || i == 6 {
+        buffalo = buffalo.capitalizedString
+    }
+    grammarQuirk += buffalo
+    
+    if i == 7 {
+        grammarQuirk += "."
+    } else {
+        grammarQuirk += " "
+    }
+}
+print(grammarQuirk)
+```
+
+### Trainyard Express
+
+As a tie-in to the trainyard metaphor, take a look at the [Trainyard Express (free)](http://trainyard.ca/aboutExpress) and Trainyard (full version) games written by [Matt Rix](https://github.com/MattRix) back in 2010. It's still available on the iOS App Store (and on Android for anyone without an iPhone). Matt also wrote a [history of his development process](http://struct.ca/2010/the-story-so-far/) for the game that he has hosted on his website.
