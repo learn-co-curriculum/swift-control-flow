@@ -45,7 +45,6 @@ if true {
     // this code will run
 }
 ```
-
 The `else` statement can be used to follow an `if` block to define a default behavior:
 
 ```swift
@@ -55,8 +54,7 @@ if false {
     // default behavior will run
 }
 ```
-
-The `else if` statements can be used to add more branching options in hierarchical way. An `else if` statement will only have the opportunity to run if *all* of the `if` and `else if` statements preceding it in its block fail in their evaluations:
+The `else if` statements can be used to add more branching options in a hierarchical way. An `else if` statement will only have the opportunity to run if *all* of the `if` and `else if` statements preceding it in its tree fail in their evaluations:
 
 ```swift
 if false {
@@ -77,7 +75,6 @@ if true {
     // will not evaluate
 }    
 ```
-
 For example, we could implement an `if` block to define behaviors based on the value of an integer:
 
 ```swift
@@ -91,7 +88,6 @@ if number > 0 {
     print("\(number) is zero.")
 }
 ```
-
 If we were then to add a special condition for the exact value of `1`, we would have to be careful about the order in which we make the evaluations. If we made this evaluation *after* the `number > 0` evaluation, the state we are checking will get lumped into that behavior:
 
 ```swift
@@ -107,7 +103,6 @@ if number > 0 {
     print("\(number) is zero.")
 }
 ```
-
 There are two ways that we can solve this, either we can filter the preceding condition for our special case:
 
 ```swift
@@ -167,7 +162,7 @@ default:
 ```
 This will print: `Three's a crowd.`.
 
-Swift's `switch` statement does **not** permit fallthrough by default, but *does* allow multiple values to be defined for a single `case` statement, and allows ranges (defined by two numbers joined by an ellipsis `...`) to be used for number evaluations.
+Swift's `switch` statement does **not** permit "fallthrough" by default, but *does* allow multiple values to be defined for a single `case` statement, and allows ranges (defined by two numbers joined by an ellipsis `...`) to be used for number evaluations.
 
 ```swift
 let number = 42
@@ -211,13 +206,13 @@ Loops are a programming construct which allow the code within them to be execute
 
 ### Implicitly-typed Arrays
 
-Swift's array literal employs the square brackets `[` `]` to wrap its initial object list separated by commas. When declaring an instance instance with `let` or `var`, that instance will be implicitly typed as an array if it assigned to an array literal. 
+Swift's array literal employs the square brackets `[` `]` to wrap its initial object list separated by commas. When declaring an instance with `let` or `var`, that instance will be implicitly typed as an array if it assigned to an array literal. 
 
 ```swift
 let numbers = [1, 2, 3, 4, 5]
 let vowels = ["a", "e", "i", "o", "u"]
 ```
-Because Swift is a statically-typed language, collections are given knowledge of the kinds of instances that they contain. The compiler enforces inserting any instances into the collection which do not conform to the specified type. We'll discuss this concept in more detail in the future, but for the time being be aware that the arrays you create will be implicitly-typed and may not permit you insert a new instance of a different type.
+Because Swift is a statically-typed language, collections are given knowledge of the kinds of instances that they contain. The compiler enforces inserting any instances into the collection which do not conform to the specified type. We'll discuss this concept in more detail in the future, but for the time being be aware that the arrays you create will be implicitly-typed and may not permit you to insert a new instance of a different type.
 
 ```swift
 // implicitly creates an array of type Int
@@ -226,7 +221,7 @@ let numbers = [1, 2, 3, 4, 5]
 // implicitly creates an array of type String
 let vowels = ["a", "e", "i", "o", "u"]
 ```
-**Important:** Avoid creating an empty implicitly-typed array. Swift 2.1 will make it an `NSArray` which is the Objective-C array class that will **not** respond to Swift's Array method calls.
+**Important:** *Avoid creating an empty implicitly-typed array. Swift 2.1 will make it an* `NSArray` *which is the Objective-C array class that will* ***not*** *respond to Swift's Array method calls.*
 
 ```swift
 // implicitly creates an NSArray (avoid this)
@@ -244,7 +239,7 @@ let e = vowels[1]
 In order to add or change an element in an array, it must have been declared using `var`. An array declared with `let` cannot be changed. This is similar to Objective-C's distinction between `NSArray` (i.e. using `let`) and `NSMutableArray` (i.e. using `var`).
 
 ```swift
-// will generate errors on constant arrays declared with let
+// will generate errors on immutable arrays declared with let
 numbers[0] = 0
 vowels.append("y")
 ```
@@ -262,7 +257,7 @@ vowels.append("y")  // adds "y" to the end of the array
 
 ##### The `count` Property
 
-Arrays have a (read-only) `count` property which holds an integer value of the number of objects held in the array that can be accessed with dot notation. **An array's `count` will always be one more than its maximum index.**
+Arrays have a (read-only) `count` property which holds an integer value of the number of objects held in the array; this property can be accessed with dot notation. **An array's `count` will always be one more than its maximum index.**
 
 ```swift
 print(numbers.count)
@@ -322,7 +317,7 @@ for <initialization>; <condition>; <increment> {
     <statements>
 }
 ```
-Though `for-in` loops provide a cleaner syntax when working with whole sequences, a `for` provides a structured syntax when using a counter variable within the loop's implementation is necessary, such as when accessing associated values in more than one array:
+Though `for-in` loops provide a cleaner syntax when working with whole sequences, a `for` loop provides a structured syntax whenever a counter variable within the loop's implementation is necessary, such as when accessing synchronized values across more than one array:
 
 ```swift
 let firstNames = ["Joe", "Tim", "Jim", "Tom", "Mark"]
@@ -398,7 +393,6 @@ Rolled a 3
 Rolled a 1
 Total score: 8
 ```
-
 However, if you find yourself needing to create a counter variable, it is recommended that you convert your loop to a `for` loop which explicitly includes it in its opening syntax:
 
 ```swift
@@ -418,6 +412,11 @@ for var i = 0; i < 8; i++ {
     }
 }
 print(grammarQuirk)
+```
+This will print:
+
+```
+Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.
 ```
 
 ### Trainyard Express
