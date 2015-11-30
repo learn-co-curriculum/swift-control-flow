@@ -12,7 +12,7 @@
 
 ## Control Flow
 
-In the context of programming, [Control Flow](https://en.wikipedia.org/wiki/Control_flow) refers to code structures that instruct the program on how to make decisions based upon various conditions; they are a way to define dynamic behavior for a variety of situations.
+In the context of programming, [Control Flow](https://en.wikipedia.org/wiki/Control_flow) refers to code structures that make decisions based upon various conditions; they are a way to define dynamic behavior for a variety of situations.
 
 A good metaphor for visualizing control flow is to imagine the branching tracks in a train-yard. Different control flow statements are analogous to different structures in the train tracks.
 
@@ -45,15 +45,17 @@ if true {
     // this code will run
 }
 ```
-The `else` statement can be used to follow an `if` block to define a default behavior:
+
+The `else` statement can be used to follow an `if` block to define behavior if the original condition is false:
 
 ```swift
 if false {
     // will not run
 } else {
-    // default behavior will run
+    // will run
 }
 ```
+
 The `else if` statements can be used to add more branching options in a hierarchical way. An `else if` statement will only have the opportunity to run if *all* of the `if` and `else if` statements preceding it in its tree fail in their evaluations:
 
 ```swift
@@ -75,6 +77,7 @@ if true {
     // will not evaluate
 }    
 ```
+
 For example, we could implement an `if` block to define behaviors based on the value of an integer:
 
 ```swift
@@ -88,6 +91,7 @@ if number > 0 {
     print("\(number) is zero.")
 }
 ```
+
 If we were then to add a special condition for the exact value of `1`, we would have to be careful about the order in which we make the evaluations. If we made this evaluation *after* the `number > 0` evaluation, the state we are checking will get lumped into that behavior:
 
 ```swift
@@ -103,6 +107,7 @@ if number > 0 {
     print("\(number) is zero.")
 }
 ```
+
 There are two ways that we can solve this, either we can filter the preceding condition for our special case:
 
 ```swift
@@ -118,6 +123,7 @@ if number > 0 && number != 1 {
     print("\(number) is zero.")
 }
 ```
+
 Or, we can change the order of our evaluations, which is the cleaner option:
 
 ```swift
@@ -140,7 +146,7 @@ This will print: `1 is the loneliest number!`.
 
 Beyond more than a handful of branches, an `if` block starts to get unwieldy and less legible. However, Swift also provides a `switch` statement that provides a cleaner syntax for branched decision-making based on the various potential states of a *single* instance.
 
-**Objective-C:** *Swift's* `switch` *statement overrides C's* `switch` *to permit use with objects. This is in contrast to working in Objective-C which accesses the C version directly that can only be used to evaluate primitive values.*
+**Objective-C:** *Swift's* `switch` *statement allows comparing objects. This is in contrast to Objective-C, where* `switch` *can only be used with primitives.*
 
 A `switch` statement is opened by using the keyword `switch` followed by the name of the instance to be evaluated. The curly braces define the scope of the `switch` statement and must contain the `case` statements. A `default` statement is permitted at the very end to catch anything that does not get caught by the `case` statements.
 
@@ -160,9 +166,10 @@ default:
 	print("\(people) is not a part of the rhyme.")
 }
 ```
+
 This will print: `Three's a crowd.`.
 
-Swift's `switch` statement does **not** permit "fallthrough" by default, but *does* allow multiple values to be defined for a single `case` statement, and allows ranges (defined by two numbers joined by an ellipsis `...`) to be used for number evaluations.
+Swift's `switch` statement does **not** "fall through" by default (i.e., you don't need `break`s at the end of each `case`), but *does* allow multiple values to be defined for a single `case` statement, and allows ranges (defined by two numbers joined by an ellipsis `...`) to be used for number comparisons.
 
 ```swift
 let number = 42
@@ -180,6 +187,7 @@ default:
 	print("\(number) is either really big or a negative number")
 }
 ```
+
 This will print: `42 is in the tens`.
 
 Since Swift's `switch` statement is capable of evaluating objects, it can be used with strings:
@@ -198,6 +206,7 @@ default:
     print("\(name) is probably a student.")
 }
 ```
+
 This will print: `Tim is the Lead Instructor.`
 
 ## Loops
@@ -212,7 +221,8 @@ Swift's array literal employs the square brackets `[` `]` to wrap its initial ob
 let numbers = [1, 2, 3, 4, 5]
 let vowels = ["a", "e", "i", "o", "u"]
 ```
-Because Swift is a statically-typed language, collections are given knowledge of the kinds of instances that they contain. The compiler enforces inserting any instances into the collection which do not conform to the specified type. We'll discuss this concept in more detail in the future, but for the time being be aware that the arrays you create will be implicitly-typed and may not permit you to insert a new instance of a different type.
+
+Swift collections have knowledge of the types of the objects they contain. The compiler disallows inserting mismatched types into the same array. We'll discuss this concept in more detail in the future, but for the time being be aware that the arrays you create will be implicitly-typed and may not permit you to insert a new instance of a different type.
 
 ```swift
 // implicitly creates an array of type Int
@@ -221,6 +231,7 @@ let numbers = [1, 2, 3, 4, 5]
 // implicitly creates an array of type String
 let vowels = ["a", "e", "i", "o", "u"]
 ```
+
 **Important:** *Avoid creating an empty implicitly-typed array. Swift 2.1 will make it an* `NSArray` *which is the Objective-C array class that will* ***not*** *respond to Swift's Array method calls.*
 
 ```swift
@@ -236,6 +247,7 @@ Arrays can be subscripted with an integer value or variable using square bracket
 let three = numbers[2]
 let e = vowels[1]
 ```
+
 In order to add or change an element in an array, it must have been declared using `var`. An array declared with `let` cannot be changed. This is similar to Objective-C's distinction between `NSArray` (i.e. using `let`) and `NSMutableArray` (i.e. using `var`).
 
 ```swift
@@ -243,6 +255,7 @@ In order to add or change an element in an array, it must have been declared usi
 numbers[0] = 0
 vowels.append("y")
 ```
+
 ![](https://curriculum-content.s3.amazonaws.com/swift/swift-control-flow/error_mutating_arrays_made_with_let.png)
 
 Instead, declare the arrays using `var` in order to mutate them:
@@ -273,6 +286,7 @@ for <element> in <sequence> {
     <statements>
 }
 ```
+
 An implementation that steps through the integers in a range might look like this:
 
 ```swift
@@ -280,6 +294,7 @@ for number in 1...5 {
     print("The square of \(number) is \(number * number).")
 }
 ```
+
 This will print:
 
 ```
@@ -289,6 +304,7 @@ The square of 3 is 9.
 The square of 4 is 16.
 The square of 5 is 25.
 ```
+
 Iterating over an array of strings might look like this:
 
 ```swift
@@ -298,6 +314,7 @@ for name in names {
     print("\(name) works at the Flatiron School.")
 }
 ```
+
 This will print:
 
 ```
@@ -317,6 +334,7 @@ for <initialization>; <condition>; <increment> {
     <statements>
 }
 ```
+
 Though `for-in` loops provide a cleaner syntax when working with whole sequences, a `for` loop provides a structured syntax whenever a counter variable within the loop's implementation is necessary, such as when accessing synchronized values across more than one array:
 
 ```swift
@@ -327,6 +345,7 @@ for var i = 0; i < firstNames.count; i++ {
     print("\(firstNames[i]) \(lastNames[i]) works at the Flatiron School.")
 }
 ``` 
+
 This will print:
 
 ```swift
@@ -350,6 +369,7 @@ while <condition> {
     <statements>
 }
 ```
+
 We can use a `while` loop to generate a string of letters of a certain length:
 
 ```swift
@@ -362,6 +382,7 @@ eek += "k!"
 
 print(eek)
 ```
+
 This will print: `eeeeeeeeeek!`.
 
 ##### The `repeat-while` loop:
@@ -371,6 +392,7 @@ repeat {
     <statements>
 } while <condition>
 ```
+
 We can use a `repeat-while` loop to write a dice roller that will continue totaling new rolls until a `1` is rolled:
 
 ```swift
@@ -385,6 +407,7 @@ repeat {
 
 print("Total score: \(total)")
 ```
+
 This may print:
 
 ```
@@ -393,6 +416,7 @@ Rolled a 3
 Rolled a 1
 Total score: 8
 ```
+
 However, if you find yourself needing to create a counter variable, it is recommended that you convert your loop to a `for` loop which explicitly includes it in its opening syntax:
 
 ```swift
@@ -413,6 +437,7 @@ for var i = 0; i < 8; i++ {
 }
 print(grammarQuirk)
 ```
+
 This will print:
 
 ```
