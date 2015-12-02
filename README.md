@@ -447,3 +447,5 @@ Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.
 ### Trainyard Express
 
 As a tie-in to the trainyard metaphor, take a look at the [Trainyard Express (free)](http://trainyard.ca/aboutExpress) and Trainyard (full version) games written by [Matt Rix](https://github.com/MattRix) back in 2010. It's still available on the iOS App Store (and on Android for anyone without an iPhone). Matt also wrote a [history of his development process](http://struct.ca/2010/the-story-so-far/) for the game that he has hosted on his website.
+
+<a href='https://learn.co/lessons/swift-control-flow' data-visibility='hidden'>View this lesson on Learn.co</a>
