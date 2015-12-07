@@ -215,7 +215,7 @@ Loops are a programming construct which allow the code within them to be execute
 
 ### Implicitly-typed Arrays
 
-Swift's array literal employs the square brackets `[` `]` to wrap its initial object list separated by commas. When declaring an instance with `let` or `var`, that instance will be implicitly typed as an array if it assigned to an array literal. 
+Swift's array literal employs the square brackets `[` `]` to wrap its initial object list separated by commas. When declaring an instance with `let` or `var`, that instance will be implicitly typed as an array if it's assigned to an array literal. 
 
 ```swift
 let numbers = [1, 2, 3, 4, 5]
@@ -264,7 +264,7 @@ Instead, declare the arrays using `var` in order to mutate them:
 var numbers = [1, 2, 3, 4, 5]
 var vowels = ["a", "e", "i", "o", "u"]
 
-numbers[0] = 9      // the first object with 9
+numbers[0] = 9      // sets the first object to 9
 vowels.append("y")  // adds "y" to the end of the array
 ```
 
